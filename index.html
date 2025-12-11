@@ -1,0 +1,502 @@
+<!doctype html>
+<html lang="am">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>Ayu Shiro</title>
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto+Slab&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --accent:#331b00;
+  --green:#28a745; /* category titles */
+  --red:#ff4d4d;
+  --card-bg: rgba(255,255,255,0.98);
+  --dark: #0b0b0b;
+  --price-bg: #e0e0e0;
+  --admin-bg: #763f00;
+  --admin-color: #a58b14;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{
+  font-family: "Segoe UI", system-ui, -apple-system, "Noto Sans", Arial;
+  color: #e6f9e6;
+  padding:12px;
+  background: url("backgrounds/Ayu back.jpg") no-repeat center center fixed;
+  background-size: cover;
+}
+body::before {
+  content:"";
+  position:fixed;
+  top:0; left:0;
+  width:100%; height:100%;
+  background: rgba(0,0,0,0.3);
+  z-index:-1;
+}
+header{
+  text-align:center;
+  margin-bottom:18px;
+}
+
+/* ================= Keyframes for breathing glow ================= */
+@keyframes breathe-glow {
+  0% { transform: scale(1); filter: drop-shadow(0 0 5px rgba(255,138,0,0.6)); opacity:1; }
+  50% { transform: scale(1.1); filter: drop-shadow(0 0 20px rgba(255,138,0,0.9)); opacity:0.9; }
+  100% { transform: scale(1); filter: drop-shadow(0 0 5px rgba(255,138,0,0.6)); opacity:1; }
+}
+
+/* ================= Logo ================= */
+.logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 12px;
+}
+.logo {
+  width: 140px;
+  height: auto;
+  border-radius: 20px; /* small rounded corners */
+  animation: breathe-glow 2.5s infinite ease-in-out; /* only the logo breathes */
+}
+
+h1 {
+  font-family: 'Montserrat', sans-serif;
+  font-size:36px;
+  color: #facb95;
+  letter-spacing:1px;
+  text-shadow: 0 2px 6px rgba(0,0,0,0.5);
+  text-transform: uppercase;
+  /* animation removed */
+}
+
+.sub {
+  font-family: 'Montserrat', sans-serif;
+  font-size:20px;
+  color:#28a745;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+  /* animation removed */
+}
+
+/* ================= Main ================= */
+main{
+  max-width:1100px;
+  margin: 0 auto 24px auto;
+}
+.category { margin-top:22px; }
+.category-header { margin-bottom:12px; }
+.category-title {
+  font-size:20px;
+  color:var(--green);
+  font-weight:800;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.6);
+  margin-bottom:6px;
+}
+.cards {
+  display:grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px,1fr));
+  gap:12px;
+}
+.card {
+  background: rgba(255,255,255,0.25);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: var(--dark);
+  border-radius:12px;
+  padding:12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.6);
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  min-height:120px;
+  transition: transform .12s ease;
+}
+.card:hover { transform: translateY(-4px); }
+.card.unavailable { opacity:0.6; filter:grayscale(0.25); border: 2px dashed rgba(220, 213, 6, 0.827); }
+.card .name { font-weight:800; font-size:16px; color: var(--dark); word-wrap:break-word; }
+.card .name span { display:block; font-weight:400; font-size:14px; color:#f5e1dee0; }
+.price-row { display:flex; align-items:center; justify-content:flex-end; gap:8px; }
+.price { font-weight:900; font-size:18px; color: var(--dark); background: var(--price-bg) !important; padding:6px 10px; border-radius:8px; min-width:80px; text-align:right; }
+
+/* Breathing animation: orange ↔ green + font size */
+@keyframes breathe {
+  0% {
+    color: #ff6600;   /* Orange */
+    font-size: 24px;
+  }
+  50% {
+    color: #00cc44;   /* Green */
+    font-size: 28px;
+  }
+  100% {
+    color: #ff6600;
+    font-size: 24px;
+  }
+}
+
+@keyframes breatheEn {
+  0% {
+    color: #ff6600;
+    font-size: 24px;
+  }
+  50% {
+    color: #00cc44;
+    font-size: 28px;
+  }
+  100% {
+    color: #ff6600;
+    font-size: 24px;
+  }
+}
+
+@keyframes breatheCopy {
+  0% {
+    color: #ff6600;
+    font-size: 22px;
+  }
+  50% {
+    color: #00cc44;
+    font-size: 26px;
+  }
+  100% {
+    color: #ff6600;
+    font-size: 22px;
+  }
+}
+
+/* Footer styles */
+.footer-am {
+    font-family: 'Noto Sans Ethiopic', sans-serif;
+    text-align: center;
+    margin-top: 15px;
+    color: var(--dark);
+    font-size: 22px;
+}
+
+.footer-en {
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+    margin-top: 10px;
+    color: var(--green);
+    font-size: 30px;
+}
+
+.footer-copyright {
+    font-family: 'Courier New', monospace;
+    text-align: center;
+    margin-top: 10px;
+    color: var(--hsla(54, 96%, 45%, 0.963));
+    font-size: 50px;
+}
+
+.admin-btn {
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  background: var(--admin-bg);
+  color: var(--admin-color);
+  font-weight:700;
+  padding:12px 20px;
+  border-radius:50px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.4);
+  cursor:pointer;
+  z-index:1000;
+}
+.admin-modal {
+  position:fixed;
+  top:0; left:0;
+  width:100%; height:100%;
+  background: rgba(0,0,0,0.8);
+  display:none;
+  justify-content:center;
+  align-items:center;
+  z-index:1000;
+  padding:12px;
+}
+.admin-content {
+  background: url('backgrounds/admin-bg.jpg') no-repeat center center;
+  background-size: cover;
+  border-radius: 12px;
+  padding: 24px;
+  max-width: 500px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  color: #fff; /* make text visible on the image */
+}
+
+.admin-content h2 { margin:0 0 12px 0; text-align:center; } 
+.admin-content textarea, .admin-content input{ padding:10px;
+    font-size:16px; 
+    border-radius:8px; 
+    border:1px solid #ccc; 
+    width:100%; 
+    resize:vertical;
+ }
+
+.admin-content button {
+  background: var(--admin-bg);
+  color: var(--admin-color);
+  font-weight:700;
+  padding:10px;
+  border-radius:8px;
+  border:none;
+  cursor:pointer;
+}
+
+@media (max-width:640px){
+  main{padding:0 8px;}
+  .card { min-height:140px; }
+  h1{font-size:28px;}
+  .sub{font-size:16px;}
+  .price { font-size:16px; min-width:70px; padding:5px 8px; }
+  .category-title{font-size:18px;}
+  .admin-content{padding:16px;}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <!-- Logo -->
+  <div class="logo-container">
+    <img src="backgrounds/Ayu-Logo.jpg" alt="Ayu Shiro logo" class="logo">
+  </div>
+  <!-- Cafe Name -->
+  <h1>AYU ሽሮ</h1>
+  <h1>ልዩ ጣዕም!<h1>
+
+Dhandhama addaa!<h2>
+  <div class="sub">Ayu Shiro — Full Menu</div>
+</header>
+
+<main id="app">
+
+<!-- ================= CIREE ================= -->
+<div class="category">
+  <div class="category-header"><div class="category-title">ቁርስ (CIREE)</div></div>
+  <div class="cards">
+    <div class="card"><div class="name">ፉል <span>Fuulii</span></div><div class="price-row"><div class="price">100</div></div></div>
+    <div class="card"><div class="name">ስፔሻል ፉል<span>Fuulii Ispeeshaalii</span></div><div class="price-row"><div class="price">250</div></div></div>
+     <div class="card"><div class="name">ፍርፍር<span>Firfirii</span></div><div class="price-row"><div class="price">160</div></div></div>
+    <div class="card"><div class="name">ስጋ ፍርፍር  <span>Firfirii Foonii</span></div><div class="price-row"><div class="price">250</div></div></div>
+    <div class="card"><div class="name">ቋንጣ ፍርፍር <span>firfirii Qoonxaa</span></div><div class="price-row"><div class="price">300</div></div></div>
+    <div class="card"><div class="name">እንቁላል ሥልስ <span>Kille</span></div><div class="price-row"><div class="price">200</div></div></div>
+    <div class="card"><div class="name">እንቁላል በስጋ <span>Killee fooniin</span></div><div class="price-row"><div class="price">250</div></div></div>
+    <div class="card"><div class="name">እንቁላል ሳንዱች <span> Saanduuchii Kille</span></div><div class="price-row"><div class="price">200</div></div></div>
+    <div class="card"><div class="name">የቡላ ገንፎ<span>Marqq Bullaa</span></div><div class="price-row"><div class="price">200</div></div></div>
+    <div class="card"><div class="name">የቡላ ገንፎ በክትፎ<span>Bullaa Kittifoon</span></div><div class="price-row"><div class="price">400</div></div></div>
+    <div class="card"><div class="name">ቲማቲም ስልስ<span>Siilsii Timaatima</span></div><div class="price-row"><div class="price">200</div></div></div>
+    <div class="card"><div class="name">ስጋ ሳንዱች<span>Saanduuchii Foonii</span></div><div class="price-row"><div class="price">300</div></div></div>
+    <div class="card"><div class="name">ጨጨብሳ<span>Selam Special Fatira</span></div><div class="price-row"><div class="price">180</div></div></div>
+    <div class="card"><div class="name">ስፔሻል ጨጨብሳ <span>Caccabsaa Ispeeshaalii</span></div><div class="price-row"><div class="price">250</div></div></div>
+    <div class="card"><div class="name">ቂንጬ<span>Qincee</span></div><div class="price-row"><div class="price">180</div></div></div>
+    <div class="card"><div class="name">ተልባ ጁስ<span>Juusa Talbaa</span></div><div class="price-row"><div class="price">150</div></div></div>
+    <div class="card"><div class="name">ፈጢራ<span>Faxiiraa</span></div><div class="price-row"><div class="price">200</div></div></div>
+
+  </div>
+</div>
+
+<!-- ================= LAAQAA FI IRBAATA ================= -->
+<div class="category">
+  <div class="category-header"><div class="category-title">ምሳ እና እራት (LAAQANA FI IRBAATA)</div></div>
+  <div class="cards">
+    <div class="card"><div class="name">የፍየል ቅቅል<span>Qiqilii</span></div><div class="price-row"><div class="price">300</div></div></div>
+    <div class="card"><div class="name">የፍየል ጥብስ<span>Xibsii</span></div><div class="price-row"><div class="price">400</div></div></div>
+    <div class="card"><div class="name">ድሎት<span>Dulatii</span></div><div class="price-row"><div class="price">230</div></div></div>
+    <div class="card"><div class="name">ጎመን በስጋ<span>Raafuu Foonii</span></div><div class="price-row"><div class="price">250</div></div></div>
+    <div class="card"><div class="name">ስጋ ፍርፍር<span>FirFirii Fooni</span></div><div class="price-row"><div class="price">250</div></div></div>
+    <div class="card"><div class="name">ቋንጣ ፍርፍር<span>Firfirii Qoonxaa</span></div><div class="price-row"><div class="price">300</div></div></div>
+    <div class="card"><div class="name">ፍርፍር<span>Firfirii</span></div><div class="price-row"><div class="price">160</div></div></div>
+    <div class="card"><div class="name">ቀይ ወጥ<span>Itoo Diimaa</span></div><div class="price-row"><div class="price">300</div></div></div>
+    <div class="card"><div class="name">ኖርማል ክትፎ<span>kittifoo</span></div><div class="price-row"><div class="price">750</div></div></div>
+    <div class="card"><div class="name">ሰፔሻል ክትፎ<span>Kittifoo Ispeeshaalii</span></div><div class="price-row"><div class="price">900</div></div></div>
+    <div class="card"><div class="name">አፍኝ<span>Affaanyii</span></div><div class="price-row"><div class="price">400</div></div></div>
+    <div class="card"><div class="name">አፊና<span>Affuunnaa</span></div><div class="price-row"><div class="price">500</div></div></div>
+    <div class="card"><div class="name">በየአይነት<span>Gosa Gosaa</span></div><div class="price-row"><div class="price">150</div></div></div>
+    <div class="card"><div class="name">ሽሮ ቦዘና<span>Shiraa Bozanaa</span></div><div class="price-row"><div class="price">250</div></div></div>
+    <div class="card"><div class="name">ተጋቢኖ<span>Tagaabiinoo</span></div><div class="price-row"><div class="price">200</div></div></div>
+    <div class="card"><div class="name">ሽሮ ፈሰስ<span>Shiroo Fasasii</span></div><div class="price-row"><div class="price">150</div></div></div>
+    <div class="card"><div class="name">ሽሮ በጎመን<span>shiroo Raafudhaan</span></div><div class="price-row"><div class="price">250</div></div></div>
+    <div class="card"><div class="name">ቲማቲም ሰላጣ<span> Salaaxaa Timaatimaa</span></div><div class="price-row"><div class="price">350</div></div></div>
+    <div class="card"><div class="name">የፍስክ ማህበራዊ<span>Maabbeerawwwii</span></div><div class="price-row"><div class="price">350</div></div></div>
+    <div class="card"><div class="name">ተልባ ፍትፍት<span>Faffatoo Talbaa</span></div><div class="price-row"><div class="price">200</div></div></div>              
+    <div class="card"><div class="name">ሱፍ ፍትፍት<span>Faffatoo Suufii</span></div><div class="price-row"><div class="price">200</div></div></div>
+    <div class="card"><div class="name">ተልባ ጁስ<span>Juusa Talbaa</span></div><div class="price-row"><div class="price">150</div></div></div>
+    <div class="card"><div class="name">ፓስታ÷ሩዝ ስጎ<span> Ruuza,Paastaa,Sugoon</span></div><div class="price-row"><div class="price">200</div></div></div>
+    <div class="card"><div class="name">ፓስታ÷መኮሮኒበስጋ<span> Makaroonii Foiniin</span></div><div class="price-row"><div class="price">300</div></div></div>
+    <div class="card"><div class="name">ፓስታ÷ሩዝ አትክልት<span>Pasta,kuduraan</span></div><div class="price-row"><div class="price">230</div></div></div>
+    <div class="card"><div class="name">የአትክልት ሰላጣ<span>salaaxaa  Kuduraan</span></div><div class="price-row"><div class="price">200</div></div></div>
+    <div class="card"><div class="name">እስፔሻል ሰላጣ<span>Ispeeshaal Salaaxaa</span></div><div class="price-row"><div class="price">300</div></div></div>
+    <div class="card"><div class="name">ፓስታ÷ሩዝ ስጎ<span> Ruuza,paastaa,Suugoon</span></div><div class="price-row"><div class="price">200</div></div></div>  
+    <div class="card"><div class="name">ፓስታ÷መኮሮኒ በስጋ<span>Makaroonii Fooniin</span></div><div class="price-row"><div class="price">300</div></div></div>
+    <div class="card"><div class="name">ፓስታ÷ሩዝ በአታክልት<span>Paastaa,Kuduraan</span></div><div class="price-row"><div class="price">230</div></div></div>
+    <div class="card"><div class="name">የአታክልት ሰላጣ<span>salaataa Kuduraa</span></div><div class="price-row"><div class="price">200</div></div></div>
+     <div class="card"><div class="name">እስፔሻል ሰላጣ<span>Ispeeshaal Salaaxaa</span></div><div class="price-row"><div class="price">300</div></div></div>
+  </div>
+</div>
+
+<!-- ================= Dhugaatii & Bishaan ================= -->
+<div class="category">
+  <div class="category-header"><div class="category-title">ለስላሳ መጠጦችና ውሃ (Dhugaatii & Bishaan)</div></div>
+  <div class="cards">
+    <div class="card"><div class="name">ኮካ <span>Coca Cola</span></div><div class="price-row"><div class="price">50</div></div></div>
+    <div class="card"><div class="name">ፔፖሲ <span>Pepsi</span></div><div class="price-row"><div class="price">50</div></div></div>
+    <div class="card"><div class="name">ኖቪዳ <span>Novida</span></div><div class="price-row"><div class="price">60</div></div></div>
+    <div class="card"><div class="name">ንጉስ <span>Neguse</span></div><div class="price-row"><div class="price">70</div></div></div>
+    <div class="card"><div class="name">ሶፊ <span>Sofi</span></div><div class="price-row"><div class="price">70</div></div></div>
+    <div class="card"><div class="name">ውሃ 2 ሊትር <span>Water 2L</span></div><div class="price-row"><div class="price">60</div></div></div>
+    <div class="card"><div class="name">ውሃ 1 ሊትር <span>Water 1L</span></div><div class="price-row"><div class="price">40</div></div></div>
+    <div class="card"><div class="name">ውሃ 0.5 ሊትር <span>Water 0.5L</span></div><div class="price-row"><div class="price">25</div></div></div>
+  </div>
+</div>
+
+</main>
+
+
+<footer class="footer-am">
+  ምርጫዎ ስላደረጉን እናመሰግናለን
+</footer>
+<footer class="footer-en">
+  Thank you For Choosing us
+</footer>
+<footer class="footer-copyright">
+  &copy; 2025 ,
+ ልዩ ጣዕም!
+
+Dhandhama addaa!
+</footer>
+
+
+<!-- Admin Button -->
+<button class="admin-btn" onclick="openAdmin()">Admin</button>
+
+<!-- Admin Button -->
+<button class="admin-btn" onclick="openAdmin()">Admin</button>
+
+<!-- ================= Admin Modal ================= -->
+<div id="adminModal" class="admin-modal">
+  <div class="admin-content" style="background: url('background.png') no-repeat center center; background-size: cover; color:#fff; padding:24px;">
+    <h2>Admin Login</h2>
+    <input type="password" id="adminPassword" placeholder="Enter password">
+    <button onclick="loginAdmin()">Login</button>
+
+    <div id="priceEditor" style="display:none;">
+      <h2>Edit Menu / ምርጫ አስተካክል</h2>
+      <button onclick="logoutAdmin()" style="background:#ff4d4d;color:#fff;margin-bottom:10px;">Logout</button>
+      <div id="menuItemsList" style="max-height:300px; overflow-y:auto;"></div>
+
+      <h3>Add New Item</h3>
+      <input type="text" id="newItemName" placeholder="Item Name / እቃ ስም">
+      <input type="text" id="newItemEng" placeholder="English Name">
+      <input type="number" id="newItemPrice" placeholder="Price / ዋጋ">
+      <select id="newItemCategory">
+        <option value="አትክልት (Vegetable)">ቁርስ (CIREE)</option>
+        <option value="አሳ (Fish)">ለስላሳ መጠጦችና ውሃ (Dhugaatii & Bishaan)</option>
+        <option value="ፓስታና ሩዝ (Pasta & Rice)">ምሳ እና እራት (LAAQANA FI IRBAATA)</option>
+      </select>
+      <button onclick="addMenuItem()" style="background:#28a745;color:#fff;margin-top:5px;">Add Item / አክል</button>
+    </div>
+  </div>
+</div>
+
+<button class="admin-btn" onclick="openAdminModal()">Admin</button>
+
+<script>
+let menuData = []; // store all menu items
+
+function openAdminModal() {
+  document.getElementById("adminModal").style.display = "flex";
+}
+
+document.getElementById("adminModal").addEventListener("click", function(e) {
+  if(e.target.id === "adminModal") {
+    document.getElementById("adminModal").style.display = "none";
+  }
+});
+
+function loginAdmin() {
+  const pw = document.getElementById("adminPassword").value;
+  if(pw !== "1234") { alert("Wrong password!"); return; }
+
+  document.getElementById("adminPassword").style.display = "none";
+  document.querySelector("#adminModal button").style.display = "none";
+  document.getElementById("priceEditor").style.display = "block";
+
+  loadMenuItems();
+}
+
+function logoutAdmin() {
+  location.reload(); // simple reload to exit admin mode
+}
+
+function loadMenuItems() {
+  menuData = [];
+  const cards = document.querySelectorAll("main .card");
+  const list = document.getElementById("menuItemsList");
+  list.innerHTML = "";
+  cards.forEach((card, i) => {
+    const name = card.querySelector(".name").innerText;
+    const priceDiv = card.querySelector(".price");
+    menuData.push({card, priceDiv});
+
+    const itemDiv = document.createElement("div");
+    itemDiv.style.marginBottom = "10px";
+    itemDiv.innerHTML = `
+      <strong style="font-weight:bold;">${name}</strong><br>
+      Edit Price / ዋጋ: <input type="number" value="${priceDiv.innerText}" data-index="${i}" style="width:80px;">
+      <button onclick="removeItem(${i})" style="background:#ff4d4d;color:#fff;margin-left:5px;">Remove / አስወግድ</button>
+    `;
+    list.appendChild(itemDiv);
+  });
+}
+
+function savePrices() {
+  const inputs = document.querySelectorAll("#menuItemsList input");
+  inputs.forEach(input => {
+    const idx = input.dataset.index;
+    menuData[idx].priceDiv.innerText = input.value;
+  });
+  alert("Prices updated!");
+}
+
+function addMenuItem() {
+  const name = document.getElementById("newItemName").value.trim();
+  const eng = document.getElementById("newItemEng").value.trim();
+  const price = document.getElementById("newItemPrice").value.trim();
+  const category = document.getElementById("newItemCategory").value;
+
+  if(!name || !price) { alert("Please fill name and price"); return; }
+
+  // find category container
+  let catDiv = Array.from(document.querySelectorAll(".category")).find(c => c.querySelector(".category-title").innerText === category);
+  if(!catDiv) {
+    alert("Category not found!"); return;
+  }
+
+  const cardsDiv = catDiv.querySelector(".cards");
+  const newCard = document.createElement("div");
+  newCard.className = "card";
+  newCard.innerHTML = `<div class="name">${name} <span>${eng}</span></div>
+                        <div class="price-row"><div class="price">${price}</div></div>`;
+  cardsDiv.appendChild(newCard);
+
+  // reload admin items
+  loadMenuItems();
+
+  document.getElementById("newItemName").value = "";
+  document.getElementById("newItemEng").value = "";
+  document.getElementById("newItemPrice").value = "";
+}
+
+function removeItem(index) {
+  menuData[index].card.remove();
+  loadMenuItems();
+}
+</script>
+
+</body>
+</html>
